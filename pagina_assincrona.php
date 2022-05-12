@@ -10,8 +10,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script>
 		function requisitarPagina(url) {
-			if(!document.getElementById('carregando')) {
-				document.getElementById('conteudo').innerHTML = '' // substitui o conteudo atual por nada --> ''
+			if(!document.getElementById('carregando')) { // document.getElementById = verififica se existe um id 'carregando', caso exista o codigo não irá ser executado
+				document.getElementById('conteudo').innerHTML = '' // substitui o conteudo atual por nada --> '' = nada
 				let imgCarregando = document.createElement('img')
 				imgCarregando.id = 'carregando'
 				imgCarregando.src = 'loading.gif'
@@ -39,6 +39,10 @@
 					console.log('Requisição finalizada com Sucesso')
 					//--------------------------------------------------//
 					// document.getElementById('carregando').remove() // Desnecessário o '.remove()', pois o 'innerHTML' já exclui o conteudo 'appendChild(imgCarregando)' e inclui o conteudo 'ajax.responseText'. 
+				}
+				else if(ajax.readyState == 4 && ajax.status == 404){
+					document.getElementById('conteudo').innerHTML = 'A requisição realizada não foi encontrada. <br> <strong> Erro: 404'
+
 				}
 			}
 			ajax.send()
@@ -69,6 +73,7 @@
 				<a href="#" onclick="requisitarPagina('pagina_1_conteudo.php')" class="btn btn-primary">Página 1</a>
 				<a href="#" onclick="requisitarPagina('pagina_2_conteudo.php')" class="btn btn-primary">Página 2</a>
 				<a href="#" onclick="requisitarPagina('pagina_3_conteudo.php')" class="btn btn-primary">Página 3</a>
+				<a href="#" onclick="requisitarPagina('pagina_4_conteudo.php')" class="btn btn-primary">Página 4</a>
 			</div>
 			<div class="col-md-4 center"></div>
 		</div>
